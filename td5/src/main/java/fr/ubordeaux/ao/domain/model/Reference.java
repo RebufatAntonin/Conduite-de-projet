@@ -11,7 +11,8 @@ public class Reference {
     private String description;
     private Price basePrice;
 
-    public Reference(String id, String name, String description, Price basePrice) {
+    public Reference(String id, String name,
+                     String description, Price basePrice) {
         this.setReferenceId(id);
         this.setName(name);
         this.setDescription(description);
@@ -19,22 +20,34 @@ public class Reference {
     }
 
     private void setReferenceId(String id) {
-        if (id == null) throw new ReferenceManagementException("cannot create reference with null id");
+        if (id == null) {
+            String message = "cannot create reference with null id";
+            throw new ReferenceManagementException(message);
+        }
         this.id = id;
     }
 
     private void setName(String name) {
-        if (name == null) throw new ReferenceManagementException("cannot create reference with null name");
+        if (name == null) {
+            String message = "cannot create reference with null name";
+            throw new ReferenceManagementException(message);
+        }
         this.name = name;
     }
 
     private void setDescription(String description) {
-        if (description == null) throw new ReferenceManagementException("cannot create reference with null description");
+        if (description == null) {
+            String message = "cannot create reference with null description";
+            throw new ReferenceManagementException(message);
+        }
         this.description = description;
     }
 
     private void setBasePrice(Price basePrice) {
-        if (basePrice == null) throw new ReferenceManagementException("cannot create reference with null basePrice");
+        if (basePrice == null) {
+            String message = "cannot create reference with null basePrice";
+            throw new ReferenceManagementException(message);
+        }
         this.basePrice = basePrice;
     }
 
@@ -57,9 +70,11 @@ public class Reference {
     @Override
     public boolean equals(Object other) {
         if (other instanceof Reference) {
-            Reference otherReference = (Reference)other;
-            boolean equals = this.getId().compareTo(otherReference.getId())==0;
-			return equals;
+            Reference otherReference = (Reference) other;
+            String id = this.getId();
+            String otherId = otherReference.getId();
+            boolean equals = id.compareTo(otherId) == 0;
+            return equals;
         } else {
             return false;
         }
@@ -72,6 +87,7 @@ public class Reference {
 
     @Override
     public String toString() {
-        return "Reference id="+id+ " name="+name+" description="+description;
+        return "Reference id=" + id + " name=" + name
+            + " description=" + description;
     }
 }
